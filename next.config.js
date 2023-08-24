@@ -1,6 +1,6 @@
 const { NextFederationPlugin } = require('@module-federation/nextjs-mf');
 
-const remoteDomain = process.env.REMOTE_DOMAIN ?? 'http://localhost:3001';
+const remoteDomain = process.env.REMOTE_APP ?? 'http://localhost:3001';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
