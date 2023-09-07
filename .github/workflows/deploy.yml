@@ -24,4 +24,5 @@ jobs:
     - run: npm run build --if-present
       env: 
         REMOTE_APP: ${{ secrets.REMOTE_APP }}
+        PORT: 3001
     - run: pm2 restart example
