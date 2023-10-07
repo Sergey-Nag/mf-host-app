@@ -1,12 +1,7 @@
-//@ts-nocheck
-import { AdminApp } from "@/components/AdminApp";
-import Link from "next/link";
+import { AdminApp } from "@/shared/components/AdminApp";
 
 export default function AdminPage() {
     return (
-        <div>
-            Admin | <Link href="/">To the main page</Link>
-            <AdminApp basename="admin" />
-        </div>
+        <AdminApp basename="admin" />
     );
 }

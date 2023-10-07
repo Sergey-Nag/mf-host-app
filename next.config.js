@@ -4,9 +4,17 @@ const remoteDomain = process.env.REMOTE_APP ?? 'http://localhost:3001';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	reactStrictMode: true,
-	webpack(config, { isServer }) {
-		if (!isServer) {
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'img.freepik.com'
+            }
+        ]
+    },
+    reactStrictMode: true,
+    webpack(config, { isServer }) {
+        if (!isServer) {
             config.plugins.push(
                 new NextFederationPlugin({
                     name: 'host',
@@ -19,7 +27,7 @@ const nextConfig = {
         }
 
         return config;
-	}
+    }
 }
 
 module.exports = nextConfig

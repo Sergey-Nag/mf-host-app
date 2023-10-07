@@ -2,7 +2,6 @@ require('dotenv').config();
 const { createServer } = require('http');
 const { parse } = require('url');
 const next = require('next');
-
 const port = parseInt(process.env.PORT || '3000', 10);
 const hostname = 'localhost';
 const dev = process.env.NODE_ENV !== 'production';
