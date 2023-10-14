@@ -1,13 +1,11 @@
 import { Grid } from "@mui/material";
-import { Suspense, useCallback, useMemo, useState } from "react";
+import { Suspense } from "react";
 import CatalogList from "./components/CatalogList";
-import SortControls from "./components/SortControls";
-import { CatalogSortValue } from "@/constants/catalogSort";
-import { PaginatedProducts, Pagination, Sort, SortingOrder } from "@/gql/graphql";
 import CatalogListSkeleton from "./components/CatalogListSkeleton";
 import PaginationControls from "./components/PaginationControls";
-import { useCatalog } from "./hooks/useCatalog";
+import SortControls from "./components/SortControls";
 import { useCatalogPagination } from "./hooks/useCatalogPagination";
+import { useCatalogSorting } from "./hooks/useCatalogSorting";
 
 export interface CatalogProps {
     filter?: any;
@@ -20,8 +18,7 @@ export interface CatalogProps {
 }
 
 function Catalog({ sorting, pagination: isPagination, productsPerPage, productsInCart, onAddToCart, removeFromCart }: CatalogProps) {
-    const { sortValue, setSortValue, sort } = 
-        useCatalog(sorting, productsInCart, onAddToCart, removeFromCart);
+    const { sortValue, setSortValue, sort } = useCatalogSorting();
     const { page, setPage, pages, setPaginationData, pagination } = useCatalogPagination(productsPerPage);
 
     return (

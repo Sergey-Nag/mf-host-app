@@ -16,6 +16,7 @@ export const GET_PRODUCTS = gql(`
                     amount
                     lowStockAlert
                 }
+                sold
             }
             end
             itemsLeft

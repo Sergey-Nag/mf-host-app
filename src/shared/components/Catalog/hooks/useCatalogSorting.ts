@@ -1,19 +1,20 @@
 import { CatalogSortValue } from "@/constants/catalogSort";
-import { SortingOrder, PaginatedProducts, Pagination } from "@/gql/graphql";
-import { useState, useMemo, useCallback } from "react";
+import { SortingOrder } from "@/gql/graphql";
+import { useMemo, useState } from "react";
 
-export function useCatalog(
-    sorting?: boolean,
-    productsInCart?: string[],
-    onAddToCart?: (id: string) => void,
-    removeFromCart?: (id: string) => void
-) {
+export function useCatalogSorting() {
     const [sortValue, setSortValue] = useState(CatalogSortValue.Popular);
 
     const sort = useMemo(() => {
         switch (sortValue) {
         case CatalogSortValue.Popular:
-            return;
+            return [{
+                field: 'sold',
+                order: SortingOrder.Desc
+            },{
+                field: 'createdISO',
+                order: SortingOrder.Asc
+            }];
         case CatalogSortValue.New:
             return [{
                 field: 'createdISO',
