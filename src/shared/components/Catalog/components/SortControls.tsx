@@ -1,5 +1,5 @@
 import { CatalogSortValue } from "@/constants/catalogSort";
-import { Box, Grid, IconButton, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { Box, Checkbox, FormControlLabel, Grid, IconButton, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { useState } from "react";
 
 export interface SortControlsProps {
@@ -19,6 +19,13 @@ export default function SortControls({ sortValue, onSortValueChange }: SortContr
                         <MenuItem value={CatalogSortValue.New}>New</MenuItem>
                         <MenuItem value={CatalogSortValue.Old}>Old</MenuItem>
                     </Select>
+                    <FormControlLabel
+                        sx={{ marginLeft: 0 }}
+                        label="Available"
+                        control={
+                            <Checkbox />
+                        }
+                    />
                 </Grid>
                 <Grid item xs={2}>
                     <IconButton></IconButton>

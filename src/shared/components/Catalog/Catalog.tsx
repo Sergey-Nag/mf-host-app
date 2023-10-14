@@ -3,35 +3,26 @@ import { Suspense, useCallback, useMemo, useState } from "react";
 import CatalogList from "./components/CatalogList";
 import SortControls from "./components/SortControls";
 import { CatalogSortValue } from "@/constants/catalogSort";
-import { Sort, SortingOrder } from "@/gql/graphql";
+import { PaginatedProducts, Pagination, Sort, SortingOrder } from "@/gql/graphql";
+import CatalogListSkeleton from "./components/CatalogListSkeleton";
+import PaginationControls from "./components/PaginationControls";
+import { useCatalog } from "./hooks/useCatalog";
+import { useCatalogPagination } from "./hooks/useCatalogPagination";
 
 export interface CatalogProps {
     filter?: any;
     sorting?: boolean;
-    pagination?: any;
+    pagination?: boolean;
+    productsPerPage?: number;
     onAddToCart?: (id: string) => void;
     removeFromCart?: (id: string) => void;
     productsInCart?: string[];
 }
 
-function Catalog({ sorting, productsInCart, onAddToCart, removeFromCart }: CatalogProps) {
-    const [sortValue, setSortValue] = useState(CatalogSortValue.Popular);
-    const sort = useMemo(() => {
-        switch (sortValue) {
-        case CatalogSortValue.Popular:
-            return;
-        case CatalogSortValue.New:
-            return [{
-                field: 'createdISO',
-                order: SortingOrder.Desc
-            }];
-        case CatalogSortValue.Old:
-            return [{
-                field: 'createdISO',
-                order: SortingOrder.Asc
-            }];
-        }
-    }, [sortValue]);
+function Catalog({ sorting, pagination: isPagination, productsPerPage, productsInCart, onAddToCart, removeFromCart }: CatalogProps) {
+    const { sortValue, setSortValue, sort } = 
+        useCatalog(sorting, productsInCart, onAddToCart, removeFromCart);
+    const { page, setPage, pages, setPaginationData, pagination } = useCatalogPagination(productsPerPage);
 
     return (
         <Grid container spacing={3}>
@@ -40,11 +31,23 @@ function Catalog({ sorting, productsInCart, onAddToCart, removeFromCart }: Catal
             </Grid>
             <Grid item xs={12}>
                 <Grid container spacing={3}>
-                    <Suspense fallback={<>Loading...</>}>
-                        <CatalogList sort={sort} productsInCart={productsInCart} onAddToCart={onAddToCart} removeFromCart={removeFromCart} />
+                    <Suspense fallback={<CatalogListSkeleton itemsAmount={productsPerPage} />}>
+                        <CatalogList
+                            sort={sort}
+                            pagination={pagination}
+                            productsInCart={productsInCart}
+                            onAddToCart={onAddToCart}
+                            removeFromCart={removeFromCart}
+                            onDataLoad={setPaginationData}
+                        />
                     </Suspense>
                 </Grid>
             </Grid>
+            {isPagination && (
+                <Grid item xs={12}>
+                    <PaginationControls pages={pages} page={page} onPageChange={setPage} />
+                </Grid>
+            )}
         </Grid>
     )
 }

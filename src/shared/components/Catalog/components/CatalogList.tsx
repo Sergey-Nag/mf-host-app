@@ -1,25 +1,33 @@
-import { PaginatedProducts, ProductFilter, Sort } from "@/gql/graphql";
+import { PaginatedProducts, Pagination, ProductFilter, Sort } from "@/gql/graphql";
 import { useQuery, useSuspenseQuery } from "@apollo/client";
 import { GET_PRODUCTS } from "../queries";
 import { Grid, Paper } from "@mui/material";
 import ProductCard from "./ProductCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface CatalogListProps {
     sort?: Sort[];
     filter?: ProductFilter;
+    pagination?: Pagination;
     onAddToCart?: (id: string) => void;
     removeFromCart?: (id: string) => void;
+    onDataLoad?: (pagination: Omit<PaginatedProducts, 'items'>) => void;
     productsInCart?: string[]
 }
 
-export default function CatalogList({ sort, filter, productsInCart, onAddToCart,removeFromCart, }: CatalogListProps) {
+export default function CatalogList({ sort, filter, pagination, productsInCart, onAddToCart, onDataLoad, removeFromCart, }: CatalogListProps) {
     const { data } = useSuspenseQuery<{ products: PaginatedProducts }>(GET_PRODUCTS, {
         variables: {
             filter,
             sort,
+            pagination
         },
     });
+
+    useEffect(() => {
+        const { end, itemsLeft, totalItems } = data.products;
+        onDataLoad?.({ end, itemsLeft, totalItems });
+    }, [data, onDataLoad]);
 
     const inCart = (id: string) => {
         if (!productsInCart) return;

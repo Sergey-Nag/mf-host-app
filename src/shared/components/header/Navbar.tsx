@@ -36,12 +36,9 @@ export default function Navbar() {
 }
 
 const useStyles = tss.create(({ theme }) => {
-    console.log(theme);
-
     return {
         header: {
             padding: `${theme.spacing(1)} ${theme.spacing(4)}`,
-            // color: theme.palette.primary.contrastText,
         },
         navigation: {
             display: 'flex',
