@@ -1,11 +1,11 @@
 import { Product } from "@/gql/graphql";
-import { Badge, Box, Button, Card, CardContent, CardMedia, Grid, Tooltip, Typography } from "@mui/material";
-import Image from "next/image";
+import { getPriceFormatText } from "@/utils/getPriceFormatText";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
-import { tss } from "tss-react/mui";
-import { getPriceFormatText } from "@/utils/getPriceFormatText";
+import { Badge, Box, Button, Grid, Tooltip, Typography } from "@mui/material";
+import Image from "next/image";
 import Link from "next/link";
+import { tss } from "tss-react/mui";
 
 export interface ProductCardProps {
     product: Product;
@@ -82,17 +82,16 @@ export default function ProductCard({ product, onAddToCart, removeFromCart, alre
     );
 }
 
-const useStyles = tss.withName('uniqsukanameProductCard').withNestedSelectors().create(({ theme, classes }) => ({
+const useStyles = tss.create(({ theme }) => ({
     product: {
         display: 'flex',
         flexDirection: 'column',
         gap: theme.spacing(1),
-        // TODO: Fix styles hydration to enable this
-        // [`a& .${classes.price}`]: { 
-        //     color: 'black',
-        //     textDecoration: 'unset',
-        //     fontSize: '1.1rem'
-        // }
+        textDecoration: 'none',
+        color: theme.palette.primary.main,
+        '&:visited': {
+            color: theme.palette.secondary.main,
+        },
     },
     coverPhotoWrapp: {
         position: 'relative',

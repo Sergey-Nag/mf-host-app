@@ -1,46 +1,23 @@
-import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
-import { renderStatic } from '@/shared/utils/renderer';
-import { CacheProvider } from '@emotion/react';
-import { cache } from '@emotion/css';
-import { CssBaseline, ThemeProvider } from '@mui/material';
-import theme from '@/theme';
+import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
+import { augmentDocumentWithEmotionCache } from './_app';
 
 function MyDocument() {
     return (
         <Html>
             <Head />
             <body>
-                <CacheProvider value={cache}>
-                    <ThemeProvider theme={theme}>
-                        <CssBaseline />
-                        <Main />
-                        <NextScript />
-                    </ThemeProvider>
-                </CacheProvider>
+                <Main />
+                <NextScript />
             </body>
         </Html>
     );
 }
 
 MyDocument.getInitialProps = async (ctx: DocumentContext) => {
-    const page = await ctx.renderPage();
-    const { css, ids } = await renderStatic(page.html);
-    console.log({css}, ids);
-    
     const initialProps = await Document.getInitialProps(ctx);
-
-    return { 
-        ...initialProps,
-        styles: (
-            <>
-                {initialProps.styles}
-                <style
-                    data-emotion={`css ${ids.join(' ')}`}
-                    dangerouslySetInnerHTML={{ __html: css }}
-                />
-            </>
-        )
-    };
+    return initialProps;
 };
+
+augmentDocumentWithEmotionCache(MyDocument);
 
 export default MyDocument;

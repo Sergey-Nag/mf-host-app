@@ -1,8 +1,8 @@
+import { EMOTION_CACHE_KEY } from '@/constants/keys';
 import { wrapper } from '@/state/session/store';
 import '@/styles/globals.css';
-import createEmotionCache from '@/theme/emotionCache';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import { CacheProvider, EmotionCache } from '@emotion/react';
+import { EmotionCache } from '@emotion/react';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -11,9 +11,7 @@ import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { ReactElement, ReactNode } from 'react';
 import { Provider } from 'react-redux';
-import createCache from '@emotion/cache';
-import { EMOTION_CACHE_KEY } from '@/constants/keys';
-import ThemeRegistry from './themeRegistry';
+import { createEmotionSsrAdvancedApproach } from "tss-react/next/pagesDir";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
     getLayout?: (page: ReactElement) => ReactNode
@@ -24,7 +22,10 @@ export interface AppPropsWithLayout extends AppProps {
     emotionCache?: EmotionCache;
 }
 
-const clientSideEmotionCache = createCache({
+const {
+    augmentDocumentWithEmotionCache,
+    withAppEmotionCache
+} = createEmotionSsrAdvancedApproach({
     key: EMOTION_CACHE_KEY
 });
 
@@ -42,13 +43,16 @@ function App({ Component, ...rest }: AppPropsWithLayout) {
 
     return (
         <Provider store={store}>
-            <ThemeRegistry options={{ key: EMOTION_CACHE_KEY }}>
-                <ApolloProvider client={client}>
-                    {getLayout(<Component {...props} />)}
-                </ApolloProvider>
-            </ThemeRegistry>
+            <ApolloProvider client={client}>
+                {getLayout(<Component {...props} />)}
+            </ApolloProvider>
         </Provider>
     )
 }
 
-export default App;
+export default withAppEmotionCache(App);
+export {
+    augmentDocumentWithEmotionCache,
+    withAppEmotionCache
+};
+
