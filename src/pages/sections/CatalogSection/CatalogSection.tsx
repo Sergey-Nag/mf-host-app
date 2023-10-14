@@ -18,7 +18,16 @@ function CatalogSection() {
         <Section>
             <Typography variant="h2">Catalog</Typography>
             <Divider />
-            <Catalog onAddToCart={onAddToCart} removeFromCart={removeFromCart} productsInCart={cart} sorting />
+            <Catalog 
+                sorting
+                pagination
+                productsPerPage={4}
+                onAddToCart={onAddToCart} 
+                removeFromCart={removeFromCart} 
+                productsInCart={cart}
+            />
+            <Divider />
+            {/* <Catalog /> */}
         </Section>
     )
 }

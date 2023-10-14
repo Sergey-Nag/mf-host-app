@@ -554,16 +554,16 @@ export type Product = CreatableModel & EditableModel & {
   characteristics?: Maybe<Array<Maybe<ProductCharacteristic>>>;
   coverPhotoUrl?: Maybe<Scalars['String']['output']>;
   createdBy?: Maybe<Admin>;
-  createdISO?: Maybe<Scalars['String']['output']>;
+  createdISO: Scalars['String']['output'];
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  isPublished?: Maybe<Scalars['Boolean']['output']>;
+  isPublished: Scalars['Boolean']['output'];
   lastModifiedISO?: Maybe<Scalars['String']['output']>;
   modifiedBy?: Maybe<Admin>;
   name: Scalars['String']['output'];
   options?: Maybe<Array<Maybe<ProductOption>>>;
   photosUrl?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  price?: Maybe<Scalars['Float']['output']>;
+  price: Scalars['Float']['output'];
   priceHistory?: Maybe<Array<Maybe<PriceHistory>>>;
   stock: Stock;
   tags?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
@@ -730,8 +730,8 @@ export enum SortingOrder {
 
 export type Stock = {
   __typename?: 'Stock';
-  amount?: Maybe<Scalars['Int']['output']>;
-  lowStockAlert?: Maybe<Scalars['Int']['output']>;
+  amount: Scalars['Int']['output'];
+  lowStockAlert: Scalars['Int']['output'];
 };
 
 export type StockEditInput = {

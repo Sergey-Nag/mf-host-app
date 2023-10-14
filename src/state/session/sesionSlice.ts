@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAction, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from 'next-redux-wrapper';
 import { AppState } from "./store";
 
@@ -9,6 +9,8 @@ interface SessionState {
 const initialState: SessionState = {
     cart: [],
 }
+
+const hydrateAction = createAction<AppState>(HYDRATE);
 
 export const sessionSlice = createSlice({
     name: 'session',
@@ -27,13 +29,15 @@ export const sessionSlice = createSlice({
             }, []);
         }
     },
-    extraReducers: {
-        [HYDRATE]: (state, action) => {
-            return {
-                ...state,
-                ...action.payload.session,
+    extraReducers: (builder) => {
+        builder.addCase(
+            hydrateAction, (state, action) => {
+                return {
+                    ...state,
+                    ...action?.payload?.session,
+                }
             }
-        }
+        );
     }
 })
 

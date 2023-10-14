@@ -5,7 +5,7 @@ import { deepPurple } from '@mui/material/colors';
 const theme = createTheme({
     palette: {
         background: {
-            default: deepPurple[700],
+            // default: deepPurple[700],
         },
     },
 });

@@ -1,4 +1,8 @@
+import { wrapper } from '@/state/session/store';
 import '@/styles/globals.css';
+import createEmotionCache from '@/theme/emotionCache';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { CacheProvider, EmotionCache } from '@emotion/react';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -6,22 +10,24 @@ import '@fontsource/roboto/700.css';
 import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { ReactElement, ReactNode } from 'react';
-import { CacheProvider } from '@emotion/react';
+import { Provider } from 'react-redux';
 import createCache from '@emotion/cache';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import { wrapper } from '@/state/session/store';
+import { EMOTION_CACHE_KEY } from '@/constants/keys';
+import ThemeRegistry from './themeRegistry';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
     getLayout?: (page: ReactElement) => ReactNode
 }
 
-type AppPropsWithLayout = AppProps & {
-    Component: NextPageWithLayout
+export interface AppPropsWithLayout extends AppProps {
+    Component: NextPageWithLayout;
+    emotionCache?: EmotionCache;
 }
 
-const cache = createCache({
-    key: 'host',
+const clientSideEmotionCache = createCache({
+    key: EMOTION_CACHE_KEY
 });
+
 const client = new ApolloClient({
     uri: 'http://localhost:4000/graphql',
     cache: new InMemoryCache({
@@ -29,16 +35,20 @@ const client = new ApolloClient({
     }),
 });
 
-function App({ Component, pageProps }: AppPropsWithLayout) {
+
+function App({ Component, ...rest }: AppPropsWithLayout) {
+    const { store, props } = wrapper.useWrappedStore(rest);
     const getLayout = Component?.getLayout || ((page) => page)
 
     return (
-        <CacheProvider value={cache}>
-            <ApolloProvider client={client}>
-                {getLayout(<Component {...pageProps} />)}
-            </ApolloProvider>
-        </CacheProvider>
+        <Provider store={store}>
+            <ThemeRegistry options={{ key: EMOTION_CACHE_KEY }}>
+                <ApolloProvider client={client}>
+                    {getLayout(<Component {...props} />)}
+                </ApolloProvider>
+            </ThemeRegistry>
+        </Provider>
     )
 }
 
-export default wrapper.withRedux(App);
+export default App;
