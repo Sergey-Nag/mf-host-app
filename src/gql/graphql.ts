@@ -565,6 +565,7 @@ export type Product = CreatableModel & EditableModel & {
   photosUrl?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   price: Scalars['Float']['output'];
   priceHistory?: Maybe<Array<Maybe<PriceHistory>>>;
+  sold: Scalars['Int']['output'];
   stock: Stock;
   tags?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 };
@@ -599,6 +600,7 @@ export type ProductFilter = {
   name?: InputMaybe<Scalars['String']['input']>;
   options?: InputMaybe<Array<InputMaybe<ProductOptionInput>>>;
   price?: InputMaybe<Scalars['NumberSearchInput']['input']>;
+  sold?: InputMaybe<Scalars['NumberSearchInput']['input']>;
   stock?: InputMaybe<StockSearchInput>;
   tags?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };

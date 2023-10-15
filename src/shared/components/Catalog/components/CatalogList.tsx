@@ -1,7 +1,7 @@
 import { PaginatedProducts, Pagination, ProductFilter, Sort } from "@/gql/graphql";
 import { useQuery, useSuspenseQuery } from "@apollo/client";
 import { GET_PRODUCTS } from "../queries";
-import { Grid, Paper } from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 import ProductCard from "./ProductCard";
 import { useEffect, useState } from "react";
 
@@ -47,6 +47,11 @@ export default function CatalogList({ sort, filter, pagination, productsInCart, 
                     <ProductCard product={prod} alreadyInCart={inCart(prod.id)} onAddToCart={onAddToCart} removeFromCart={removeFromCart} />
                 </Grid>
             ))}
+            {data && data.products.items?.length === 0 && (
+                <Grid item xs={12}>
+                    <Typography variant="h3" align="center" paddingY={15}>Products not found!</Typography>
+                </Grid>
+            )}
         </>
     )
 }
