@@ -171,14 +171,14 @@ export type EditPageInput = {
 
 export type EditProductInput = {
   alias?: InputMaybe<Scalars['String']['input']>;
-  categoriesId?: InputMaybe<Scalars['ID']['input']>;
+  categoriesId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   characteristics?: InputMaybe<Array<InputMaybe<CharacteristicInput>>>;
-  coverPhotoUrl?: InputMaybe<Scalars['String']['input']>;
+  coverPhoto?: InputMaybe<ImageContentInput>;
   description?: InputMaybe<Scalars['String']['input']>;
   isPublished?: InputMaybe<Scalars['Boolean']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   options?: InputMaybe<Array<InputMaybe<ProductOptionInput>>>;
-  photosUrl?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  photos?: InputMaybe<Array<InputMaybe<ImageContentInput>>>;
   price?: InputMaybe<Scalars['Float']['input']>;
   stock?: InputMaybe<StockEditInput>;
   tags?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -196,6 +196,27 @@ export type EditableModel = {
   modifiedBy?: Maybe<User>;
 };
 
+export type ImageContent = CreatableModel & {
+  __typename?: 'ImageContent';
+  alt?: Maybe<Scalars['String']['output']>;
+  createdBy?: Maybe<Admin>;
+  createdISO: Scalars['String']['output'];
+  deleteUrl?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  mediumUrl?: Maybe<Scalars['String']['output']>;
+  thumbUrl?: Maybe<Scalars['String']['output']>;
+  url: Scalars['String']['output'];
+};
+
+export type ImageContentInput = {
+  alt?: InputMaybe<Scalars['String']['input']>;
+  deleteUrl?: InputMaybe<Scalars['String']['input']>;
+  id: Scalars['ID']['input'];
+  mediumUrl?: InputMaybe<Scalars['String']['input']>;
+  thumbUrl?: InputMaybe<Scalars['String']['input']>;
+  url: Scalars['String']['input'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addAdmin?: Maybe<Admin>;
@@ -204,12 +225,12 @@ export type Mutation = {
   addOrder?: Maybe<Order>;
   addPage?: Maybe<Page>;
   addProduct?: Maybe<Product>;
-  deleteAdmin?: Maybe<Admin>;
-  deleteCategory?: Maybe<Category>;
-  deleteCustomer?: Maybe<Customer>;
-  deleteOrder?: Maybe<Order>;
-  deletePage?: Maybe<Page>;
-  deleteProduct?: Maybe<Product>;
+  deleteAdmins?: Maybe<Array<Maybe<Admin>>>;
+  deleteCategories?: Maybe<Array<Maybe<Category>>>;
+  deleteCustomers?: Maybe<Array<Maybe<Customer>>>;
+  deleteOrders?: Maybe<Array<Maybe<Order>>>;
+  deletePages?: Maybe<Array<Maybe<Page>>>;
+  deleteProducts?: Maybe<Array<Maybe<Product>>>;
   editAdmin?: Maybe<Admin>;
   editCategory?: Maybe<Category>;
   editCustomer?: Maybe<Customer>;
@@ -249,33 +270,33 @@ export type MutationAddProductArgs = {
 };
 
 
-export type MutationDeleteAdminArgs = {
-  id: Scalars['ID']['input'];
+export type MutationDeleteAdminsArgs = {
+  ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
 
-export type MutationDeleteCategoryArgs = {
-  id: Scalars['ID']['input'];
+export type MutationDeleteCategoriesArgs = {
+  ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
 
-export type MutationDeleteCustomerArgs = {
-  id: Scalars['ID']['input'];
+export type MutationDeleteCustomersArgs = {
+  ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
 
-export type MutationDeleteOrderArgs = {
-  id: Scalars['ID']['input'];
+export type MutationDeleteOrdersArgs = {
+  ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
 
-export type MutationDeletePageArgs = {
-  id: Scalars['ID']['input'];
+export type MutationDeletePagesArgs = {
+  ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
 
-export type MutationDeleteProductArgs = {
-  id: Scalars['ID']['input'];
+export type MutationDeleteProductsArgs = {
+  ids: Array<InputMaybe<Scalars['ID']['input']>>;
 };
 
 
@@ -355,12 +376,12 @@ export type NewProductInput = {
   alias?: InputMaybe<Scalars['String']['input']>;
   categoriesId?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   characteristics?: InputMaybe<Array<InputMaybe<CharacteristicInput>>>;
-  coverPhotoUrl?: InputMaybe<Scalars['String']['input']>;
+  coverPhoto?: InputMaybe<ImageContentInput>;
   description?: InputMaybe<Scalars['String']['input']>;
   isPublished?: InputMaybe<Scalars['Boolean']['input']>;
   name: Scalars['String']['input'];
   options?: InputMaybe<Array<InputMaybe<ProductOptionInput>>>;
-  photosUrl?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  photos?: InputMaybe<Array<InputMaybe<ImageContentInput>>>;
   price?: InputMaybe<Scalars['Float']['input']>;
   stock: StockInput;
   tags?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -552,7 +573,7 @@ export type Product = CreatableModel & EditableModel & {
   alias: Scalars['String']['output'];
   categories?: Maybe<Array<Maybe<ProductCategory>>>;
   characteristics?: Maybe<Array<Maybe<ProductCharacteristic>>>;
-  coverPhotoUrl?: Maybe<Scalars['String']['output']>;
+  coverPhoto?: Maybe<ImageContent>;
   createdBy?: Maybe<Admin>;
   createdISO: Scalars['String']['output'];
   description?: Maybe<Scalars['String']['output']>;
@@ -562,7 +583,7 @@ export type Product = CreatableModel & EditableModel & {
   modifiedBy?: Maybe<Admin>;
   name: Scalars['String']['output'];
   options?: Maybe<Array<Maybe<ProductOption>>>;
-  photosUrl?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  photos?: Maybe<Array<Maybe<ImageContent>>>;
   price: Scalars['Float']['output'];
   priceHistory?: Maybe<Array<Maybe<PriceHistory>>>;
   sold: Scalars['Int']['output'];

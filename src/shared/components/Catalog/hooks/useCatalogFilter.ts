@@ -31,6 +31,7 @@ export function useCatalogFilter() {
 
             return {
                 ...available,
+                isPublished: true,
                 categoriesId: restFilter?.categories.length
                     ? restFilter.categories
                     : undefined,

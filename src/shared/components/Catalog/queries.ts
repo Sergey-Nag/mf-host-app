@@ -12,7 +12,10 @@ export const GET_PRODUCTS = gql(`
                 alias
                 name
                 price
-                coverPhotoUrl
+                coverPhoto {
+                    url
+                    alt
+                }
                 stock {
                     amount
                     lowStockAlert
