@@ -16,7 +16,7 @@ export interface ProductCardProps {
 
 export default function ProductCard({ product, onAddToCart, removeFromCart, alreadyInCart }: ProductCardProps) {
     const { classes } = useStyles();
-    const coverPhotoUrl = product.coverPhotoUrl ?? '/assets/image-placeholder.png';
+    const coverPhotoUrl = product.coverPhoto?.url ?? '/assets/image-placeholder.png';
     const showLowStock = product.stock.lowStockAlert !== 0 && product.stock.amount < product.stock.lowStockAlert;
     const canAddMore = product.stock.amount - (alreadyInCart ?? 0) > 0;
 
@@ -29,7 +29,7 @@ export default function ProductCard({ product, onAddToCart, removeFromCart, alre
                             placeholder="blur"
                             blurDataURL="/assets/image-placeholder.png"
                             className={classes.coverPhoto}
-                            alt={product.name}
+                            alt={product.coverPhoto?.alt ?? product.name}
                             src={coverPhotoUrl}
                             width={0}
                             height={0}

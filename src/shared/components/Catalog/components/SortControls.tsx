@@ -5,9 +5,10 @@ import { useState } from "react";
 export interface SortControlsProps {
     sortValue?: CatalogSortValue,
     onSortValueChange?: (value: CatalogSortValue) => void;
+    onAvailableChange?: (value: boolean) => void;
 }
 
-export default function SortControls({ sortValue, onSortValueChange }: SortControlsProps) {
+export default function SortControls({ sortValue, onSortValueChange, onAvailableChange }: SortControlsProps) {
     return (
         <Box bgcolor="lightgray" p={1}>
             <Grid container>
@@ -25,6 +26,9 @@ export default function SortControls({ sortValue, onSortValueChange }: SortContr
                         control={
                             <Checkbox />
                         }
+                        onChange={(e, value) => {
+                            onAvailableChange?.(value);
+                        }}
                     />
                 </Grid>
                 <Grid item xs={2}>

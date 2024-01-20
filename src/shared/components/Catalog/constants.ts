@@ -1,0 +1,6 @@
+export const MIN_FILTER_PRICE = 0;
+export const MAX_FILTER_PRICE = 99_999;
+export const FILTER_PRICE_STEP = 10;
+export const SLIDER_PRICE_DEFAULT_MIN = MIN_FILTER_PRICE;
+export const SLIDER_PRICE_DEFAULT_MAX = 5000;
+export const PRICE_DECIMALS = 1;
