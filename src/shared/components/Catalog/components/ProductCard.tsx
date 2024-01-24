@@ -40,7 +40,7 @@ export default function ProductCard({ product, onAddToCart, removeFromCart, alre
                 <Grid container>
                     <Grid item xs={9}>
                         <Typography className={classes.name} variant="body1">
-                            {product.name + product.name + product.name}
+                            {product.name}
                         </Typography>
                     </Grid>
                     <Grid item xs={3}>

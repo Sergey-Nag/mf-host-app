@@ -615,6 +615,7 @@ export type ProductFilter = {
   hasCoverPhoto?: InputMaybe<Scalars['Boolean']['input']>;
   hasPhotos?: InputMaybe<Scalars['Boolean']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
+  ids?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   isPublished?: InputMaybe<Scalars['Boolean']['input']>;
   lastModifiedISO?: InputMaybe<Scalars['String']['input']>;
   modifiedById?: InputMaybe<Scalars['ID']['input']>;

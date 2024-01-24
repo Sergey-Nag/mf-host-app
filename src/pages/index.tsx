@@ -6,7 +6,7 @@ import Layout from './layout';
 import SliderSection from './sections/SliderSection/SliderSection';
 import CatalogSection from './sections/CatalogSection/CatalogSection';
 import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
-import { client } from './_app';
+import { appoloClient } from './_app';
 import { gql } from '@apollo/client';
 import { Category, PaginatedCategories, ProductOption } from '@/gql/graphql';
 import { AppProps } from 'next/app';
@@ -30,7 +30,7 @@ interface PageDataResponse {
 }
 
 export const getStaticProps = async () => {
-    const { data } = await client.query<PageDataResponse>({
+    const { data } = await appoloClient.query<PageDataResponse>({
         query: gql`
             query Categories {
                 categories {

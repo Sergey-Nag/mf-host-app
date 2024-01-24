@@ -29,13 +29,12 @@ const {
     key: EMOTION_CACHE_KEY
 });
 
-export const client = new ApolloClient({
+export const appoloClient = new ApolloClient({
     uri: 'http://localhost:4000/graphql',
     cache: new InMemoryCache({
         addTypename: false,
     }),
 });
-
 
 function App({ Component, ...rest }: AppPropsWithLayout) {
     const { store, props } = wrapper.useWrappedStore(rest);
@@ -43,7 +42,7 @@ function App({ Component, ...rest }: AppPropsWithLayout) {
 
     return (
         <Provider store={store}>
-            <ApolloProvider client={client}>
+            <ApolloProvider client={appoloClient}>
                 {getLayout(<Component {...props} />)}
             </ApolloProvider>
         </Provider>

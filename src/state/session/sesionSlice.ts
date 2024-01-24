@@ -3,11 +3,11 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { AppState } from "./store";
 
 interface SessionState {
-    cart: string[]
+    cart: Record<string, number>;
 }
 
 const initialState: SessionState = {
-    cart: [],
+    cart: {},
 }
 
 const hydrateAction = createAction<AppState>(HYDRATE);
@@ -16,17 +16,21 @@ export const sessionSlice = createSlice({
     name: 'session',
     initialState,
     reducers: {
-        addProducts(state, action) {
-            state.cart.push(...action.payload);
+        addProduct(state, { payload }: { payload: { id: string, amount: number } }) {
+            state.cart[payload.id] = state.cart[payload.id]
+                ? state.cart[payload.id] + payload.amount
+                : payload.amount;
         },
-        removeProducts(state, { payload }) {
-            state.cart = state.cart.reduce<string[]>((acc, item) => {
-                if (!payload.includes(item)) {
-                    acc.push(item);
-                }
+        removeProduct(state, { payload }: { payload: { id: string, amount?: number } }) {
+            if (!payload.amount) {
+                delete state.cart[payload.id];
+                return;
+            }
 
-                return acc;
-            }, []);
+            state.cart[payload.id] -= payload.amount;
+        },
+        clearCart(state) {
+            state.cart = {};
         }
     },
     extraReducers: (builder) => {
@@ -42,7 +46,7 @@ export const sessionSlice = createSlice({
 })
 
 
-export const { addProducts, removeProducts } = sessionSlice.actions;
+export const { addProduct, removeProduct, clearCart } = sessionSlice.actions;
 
 export const selectSessionState = (state: AppState) => state.session;
 

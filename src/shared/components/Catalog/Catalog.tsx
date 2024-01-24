@@ -1,15 +1,14 @@
 import { Grid } from "@mui/material";
 import { Suspense } from "react";
+import { CatalogWithFilter } from "./CatalogWithFilter";
 import CatalogList from "./components/CatalogList";
 import CatalogListSkeleton from "./components/CatalogListSkeleton";
+import { ProductFilterOptions } from "./components/FilterControls/FilterControls";
 import PaginationControls from "./components/PaginationControls";
 import SortControls from "./components/SortControls";
+import { useCatalogFilter } from "./hooks/useCatalogFilter";
 import { useCatalogPagination } from "./hooks/useCatalogPagination";
 import { useCatalogSorting } from "./hooks/useCatalogSorting";
-import { useCatalogFilter } from "./hooks/useCatalogFilter";
-import { CatalogWithFilter } from "./CatalogWithFilter";
-import { Category } from "@/gql/graphql";
-import { ProductFilterOptions } from "./components/FilterControls/FilterControls";
 
 export interface CatalogProps {
     filter?: ProductFilterOptions;
@@ -18,10 +17,9 @@ export interface CatalogProps {
     productsPerPage?: number;
     onAddToCart?: (id: string) => void;
     removeFromCart?: (id: string) => void;
-    productsInCart?: string[];
 }
 
-function Catalog({ sorting, filter, pagination: isPagination, productsPerPage, productsInCart, onAddToCart, removeFromCart }: CatalogProps) {
+function Catalog({ sorting, filter, pagination: isPagination, productsPerPage, onAddToCart, removeFromCart }: CatalogProps) {
     const { sortValue, setSortValue, sort } = useCatalogSorting();
     const { page, setPage, pages, setPaginationData, pagination } = useCatalogPagination(productsPerPage);
     const { productFilter, setRestFilter, onAvailableChange } = useCatalogFilter();
@@ -45,7 +43,6 @@ function Catalog({ sorting, filter, pagination: isPagination, productsPerPage, p
                                 sort={sort}
                                 pagination={pagination}
                                 filter={productFilter}
-                                productsInCart={productsInCart}
                                 onAddToCart={onAddToCart}
                                 removeFromCart={removeFromCart}
                                 onDataLoad={setPaginationData}
