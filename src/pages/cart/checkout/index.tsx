@@ -291,7 +291,7 @@ export default function CheckoutPage({ pageProps }: CheckoutProps) {
     );
 }
 
-const useStyles = tss.create(({ theme }) => ({
+const useStyles = tss.create(() => ({
     input: {
         position: 'relative',
         '& .MuiFormHelperText-root': {

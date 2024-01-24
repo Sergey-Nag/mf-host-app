@@ -17,5 +17,6 @@ export default function Layout({ children }: PropsWithChildren) {
 const useStyles = tss.create(({ theme }) => ({
     main: {
         paddingTop: theme.spacing(10),
+        minHeight: `calc(100vh - ${theme.spacing(10)})`,
     }
 }));
