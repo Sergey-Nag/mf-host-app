@@ -22,7 +22,7 @@ export default function ProductCard({ product, onAddToCart, removeFromCart, alre
 
     return (
         <Box className={classes.product}>
-            <Link className={classes.product} href={`/product/${product.alias}`}>
+            <Link className={classes.product} href={`/catalog/${product.alias}`}>
                 <Badge className={classes.lowStockBadge} badgeContent={showLowStock ? 'Low stock!' : null} color="warning">
                     <div className={classes.coverPhotoWrapp}>
                         <Image

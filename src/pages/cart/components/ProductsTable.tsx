@@ -2,7 +2,7 @@ import Delete from "@mui/icons-material/Delete";
 import { Box, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from "@mui/material";
 import Image from "next/image";
 import { CartProduct } from "./Products";
-import { QuantityCounter } from "./QuantityCounter";
+import { QuantityCounter } from "../../../shared/components/QuantityCounter";
 
 export interface ProductsTableProps {
     products: CartProduct[];
