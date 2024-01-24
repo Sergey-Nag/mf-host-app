@@ -4,6 +4,9 @@ import { GET_PRODUCTS } from "../queries";
 import { Grid, Paper, Typography } from "@mui/material";
 import ProductCard from "./ProductCard";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectSessionState } from "@/state/session/customerSlice";
+import { AppState } from "@/state/session/store";
 
 export interface CatalogListProps {
     sort?: Sort[];
@@ -12,10 +15,9 @@ export interface CatalogListProps {
     onAddToCart?: (id: string) => void;
     removeFromCart?: (id: string) => void;
     onDataLoad?: (pagination: Omit<PaginatedProducts, 'items'>) => void;
-    productsInCart?: string[]
 }
 
-export default function CatalogList({ sort, filter, pagination, productsInCart, onAddToCart, onDataLoad, removeFromCart, }: CatalogListProps) {
+export default function CatalogList({ sort, filter, pagination, onAddToCart, onDataLoad, removeFromCart, }: CatalogListProps) {
     const { data } = useSuspenseQuery<{ products: PaginatedProducts }>(GET_PRODUCTS, {
         variables: {
             filter,
@@ -23,6 +25,7 @@ export default function CatalogList({ sort, filter, pagination, productsInCart, 
             pagination
         },
     });
+    const cart = useSelector((state: AppState) => state.session.cart);
 
     useEffect(() => {
         const { end, itemsLeft, totalItems } = data.products;
@@ -30,14 +33,7 @@ export default function CatalogList({ sort, filter, pagination, productsInCart, 
     }, [data, onDataLoad]);
 
     const inCart = (id: string) => {
-        if (!productsInCart) return;
-
-        return productsInCart.reduce((acc, prodId) => {
-            if (prodId === id) {
-                return acc + 1;
-            }
-            return acc;
-        }, 0);
+        return cart[id] ?? false;
     }
 
     return (

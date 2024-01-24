@@ -1,16 +1,16 @@
+import { selectSessionState } from '@/state/session/sesionSlice';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { AppBar, Badge, Divider, Grid } from '@mui/material';
-import React from 'react';
+import { useSelector } from 'react-redux';
 import { tss } from 'tss-react/mui';
 import NavButton from './components/NavButton';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { useSelector } from 'react-redux';
-import { selectSessionState } from '@/state/session/sesionSlice';
 
 
 export default function Navbar() {
     const { classes } = useStyles();
     const { cart } = useSelector(selectSessionState);
 
+    const cartLength = Object.values(cart).reduce((acc, curr) => acc + curr, 0);
     return (
         <AppBar className={classes.header} color="default" >
             <Grid container justifyContent="space-between">
@@ -23,8 +23,8 @@ export default function Navbar() {
                         <Divider orientation='vertical' flexItem />
                         <NavButton href="/">Categories</NavButton>
                         <Divider orientation='vertical' flexItem />
-                        <Badge className={classes.cartBadge} badgeContent={cart.length} color="primary">
-                            <NavButton href="/" startIcon={<ShoppingCartIcon />}>
+                        <Badge className={classes.cartBadge} badgeContent={cartLength} color="primary">
+                            <NavButton href="/cart" startIcon={<ShoppingCartIcon />}>
                                 Cart
                             </NavButton>
                         </Badge>
