@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { tss } from 'tss-react/mui';
 import { ProductCharacteristics } from './ProductCharacteristics';
 import { ProductOptions } from './ProductOptions';
+import { IProductDetails } from '@/pages/catalog/[alias]';
 
 const useStyles = tss.create(({ theme }) => ({
     coverPhoto: {
@@ -30,22 +31,7 @@ const useStyles = tss.create(({ theme }) => ({
 }));
 
 export interface ProductDetailProps {
-    product: {
-        coverPhoto: {
-            url: string;
-            alt?: string;
-        };
-        photos?: { url: string, alt: string, id: string }[];
-        id: string;
-        name: string,
-        price: number,
-        description: string,
-        categories: { alias: string, name: string, id: string }[];
-        tags: string[];
-        characteristics: { name: string, value: string }[];
-        options: { name: string, options: string[] }[];
-        stock: { amount: number };
-    }
+    product: IProductDetails
 }
 
 export default function ProductDetail({ product }: ProductDetailProps) {
