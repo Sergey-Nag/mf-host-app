@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/client";
 import { Box, CircularProgress } from "@mui/material";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { GET_CART_PRODUCTS } from "../queries";
+import { GET_CART_PRODUCTS } from "../../../queries/cartQueries";
 import { ProductsTable } from "./ProductsTable";
 
 export interface ProductsProps {

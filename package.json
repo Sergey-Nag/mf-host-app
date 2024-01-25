@@ -7,7 +7,6 @@
 		"next:dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"server": "node server.js",
 		"lint": "next lint",
 		"generate-types": "graphql-codegen --config codegen.ts"
 	},
@@ -34,7 +33,6 @@
 		"graphql": "^16.8.1",
 		"next": "13.4.13",
 		"next-redux-wrapper": "^8.1.0",
-		"nuqs": "^1.15.4",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
 		"react-redux": "^8.1.3",

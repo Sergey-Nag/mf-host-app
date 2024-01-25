@@ -5,8 +5,8 @@ import { useRouter } from 'next/router';
 import { ReactElement } from 'react';
 import { tss } from 'tss-react/mui';
 import Layout from '../layout';
-import ProductDetail from './components/ProductDetail';
-import { PRODUCT_DETAIL } from './queries';
+import ProductDetail from '../../components/catalog/components/ProductDetail';
+import { PRODUCT_DETAIL } from '../../queries/catalogQueries';
 
 const useStyles = tss.create(({ theme }) => ({
     container: {

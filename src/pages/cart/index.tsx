@@ -3,7 +3,7 @@ import { Box, Container, Divider, Typography } from "@mui/material";
 import { ReactElement } from "react";
 import { useSelector } from "react-redux";
 import Layout from "../layout";
-import { Products } from "./components/Products";
+import { Products } from "../../components/cart/components/Products";
 
 export default function CartPage() {
     const cart = useSelector((state: AppState) => state.session.cart);

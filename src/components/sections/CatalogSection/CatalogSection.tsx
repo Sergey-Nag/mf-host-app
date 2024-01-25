@@ -26,7 +26,7 @@ function CatalogSection({ filter }: CatalogSectionProps) {
             <Catalog 
                 sorting
                 pagination
-                filter={filter}
+                filterOptions={filter}
                 productsPerPage={4}
                 onAddToCart={onAddToCart} 
                 removeFromCart={removeFromCart}

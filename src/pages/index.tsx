@@ -9,8 +9,8 @@ import Link from 'next/link';
 import { ReactElement } from 'react';
 import { appoloClient } from './_app';
 import Layout from './layout';
-import CatalogSection from './sections/CatalogSection/CatalogSection';
-import SliderSection from './sections/SliderSection/SliderSection';
+import CatalogSection from '../components/sections/CatalogSection/CatalogSection';
+import SliderSection from '../components/sections/SliderSection/SliderSection';
 
 loadDevMessages();
 loadErrorMessages();
