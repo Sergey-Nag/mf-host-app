@@ -4,11 +4,11 @@ import { useMutation, useQuery } from '@apollo/client';
 import { Box, Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, Divider, FormLabel, Grid, TextField, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
-import { ReactElement, useLayoutEffect } from 'react';
+import { ReactElement, useEffect, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { tss } from 'tss-react/mui';
 import * as Yup from 'yup';
-import { CHECKOUT, GET_CART_PRODUCTS, GET_CUSTOMER_BY_IP } from '../queries';
+import { CHECKOUT, GET_CART_PRODUCTS, GET_CUSTOMER_BY_IP } from '../../../queries/cartQueries';
 import { PHONE_NUMBER_REGEXP } from '@/constants/regexp';
 import { appoloClient } from '@/pages/_app';
 import { clearCart } from '@/state/session/sesionSlice';
@@ -26,7 +26,7 @@ export default function CheckoutPage({ pageProps }: CheckoutProps) {
     const cart = useSelector((state: any) => state.session.cart);
     const dispatch = useDispatch();
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (Object.keys(cart).length === 0) {
             router.replace('/cart');
         }
@@ -303,6 +303,7 @@ const useStyles = tss.create(() => ({
 
 export async function getServerSideProps({ req }: any) {
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    
     const { data } = await appoloClient.query<any>({
         query: GET_CUSTOMER_BY_IP,
         variables: {

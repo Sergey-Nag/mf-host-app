@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { tss } from 'tss-react/mui';
 import { appoloClient } from '../_app';
 import Layout from '../layout';
-import { FILTER_OPTIONS } from './queries';
+import { FILTER_OPTIONS } from '../../queries/catalogQueries';
 
 export interface CatalogPageProps {
     productFilter?: ProductFilterOptions;
