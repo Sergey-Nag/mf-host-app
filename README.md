@@ -1,38 +1,83 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# E-Shop (host) Next.js Application
+
+This repository contains the source code for an E-Shop built using Next.js.
+- [Admin panel](https://github.com/Sergey-Nag/mf-host-app) (Microfrontend app)
+- [API Server](https://github.com/Sergey-Nag/cms-data-api) (GraphQL and REST API server)
+
 
 ## Getting Started
 
-First, run the development server:
+1. **Clone the Repository:**
+
+   ```bash
+   git clone https://github.com/Sergey-Nag/mf-host-app.git
+   cd e-shop-next
+   ```
+
+2. **Install Dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+## Available Scripts
+
+### `npm run dev`
+
+Run the application in development mode using the custom server. This script launches the server defined in `server.js` with the configured `/admin` route that renders the SPA Microfrontend React app.
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### `npm run next:dev`
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Run the Next.js development server.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```bash
+npm run next:dev
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### `npm run build`
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Build the Next.js application for production.
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+### `npm run start`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Start the built Next.js application in production mode.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+npm run start
+```
 
-## Deploy on Vercel
+### `npm run lint`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Lint the project using Next.js linting.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+npm run lint
+```
+
+### `npm run generate-types`
+
+Generate types using GraphQL code generation. This script uses the configuration defined in `codegen.ts`. (The API Server must be running)
+
+```bash
+npm run generate-types
+```
+
+## Configuration
+
+The application is configured to launch with a custom server defined in `server.js`. This server handles the `/admin` route, rendering the SPA Microfrontend React app.
+
+### Microfrontend Admin Panel App
+
+For the admin panel, we utilize the [Admin Microfrontend app](https://github.com/Sergey-Nag/mf-host-app). Ensure it is built and running to access the `/admin` route.
+
+### API Server App
+
+To work with data, you need to run the [API Server app](https://github.com/Sergey-Nag/cms-data-api) first.
