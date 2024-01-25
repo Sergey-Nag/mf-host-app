@@ -1,6 +1,5 @@
 
-import React from 'react';
-import { Button, CSSObject, Grid, Typography } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { tss } from 'tss-react/mui';
 
 export interface QuantityCounterProps {
@@ -10,6 +9,13 @@ export interface QuantityCounterProps {
 }
 
 const useStyles = tss.create(({ theme }) => ({
+    container: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 'auto',
+        flexWrap: 'nowrap',
+    },
     button: {
         borderRadius: '50%',
         width: 32,
@@ -52,7 +58,7 @@ export function QuantityCounter({ value, onChange, max }: QuantityCounterProps) 
     const increaseDisabled = value >= max;
 
     return (
-        <Grid container alignItems="center" spacing={1} justifyContent="center" flexWrap="nowrap">
+        <Grid container spacing={1} className={classes.container}>
             <Grid item>
                 <Button
                     className={classes.button}

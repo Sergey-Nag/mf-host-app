@@ -1,12 +1,12 @@
-import React, { ReactElement } from 'react';
-import { useRouter } from 'next/router';
-import { useQuery } from '@apollo/client';
-import { PRODUCT_DETAIL } from './queries';
-import { Container, Typography, Skeleton, Button, Divider, Grid } from '@mui/material';
-import { tss } from 'tss-react/mui';
-import ProductDetail from './components/ProductDetail';
-import Layout from '../layout';
 import { Breadcrumbs } from '@/shared/components/Breadcrumbs/Breadcrumbs';
+import { useQuery } from '@apollo/client';
+import { Container } from '@mui/material';
+import { useRouter } from 'next/router';
+import { ReactElement } from 'react';
+import { tss } from 'tss-react/mui';
+import Layout from '../layout';
+import ProductDetail from './components/ProductDetail';
+import { PRODUCT_DETAIL } from './queries';
 
 const useStyles = tss.create(({ theme }) => ({
     container: {

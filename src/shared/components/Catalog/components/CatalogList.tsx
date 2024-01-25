@@ -1,12 +1,11 @@
 import { PaginatedProducts, Pagination, ProductFilter, Sort } from "@/gql/graphql";
-import { useQuery, useSuspenseQuery } from "@apollo/client";
-import { GET_PRODUCTS } from "../queries";
-import { Grid, Paper, Typography } from "@mui/material";
-import ProductCard from "./ProductCard";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { selectSessionState } from "@/state/session/customerSlice";
 import { AppState } from "@/state/session/store";
+import { useSuspenseQuery } from "@apollo/client";
+import { Grid, Typography } from "@mui/material";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { GET_PRODUCTS } from "../queries";
+import ProductCard from "./ProductCard";
 
 export interface CatalogListProps {
     sort?: Sort[];

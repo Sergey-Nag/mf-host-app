@@ -8,9 +8,7 @@ import { tss } from 'tss-react/mui';
 const useStyles = tss.create(({ theme }) => ({
     footer: {
         padding: theme.spacing(6),
-    },
-    socialIcons: {
-        // marginTop: theme.spacing(2),
+        marginTop: theme.spacing(6),
     },
 }));
 
@@ -57,7 +55,7 @@ export default function Footer() {
                         </Typography>
                     </Grid>
 
-                    <Grid item xs={12} md={3} className={classes.socialIcons}>
+                    <Grid item xs={12} md={3}>
                         <Typography variant="h6" gutterBottom>
                             Connect with Us
                         </Typography>

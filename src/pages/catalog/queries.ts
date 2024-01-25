@@ -2,9 +2,7 @@ import { gql } from '@apollo/client';
 
 export const PRODUCT_DETAIL = gql`
     query ProductDetail($alias: String!) {
-        product(find: {
-            alias: $alias
-        }) {
+        product(find: { alias: $alias }) {
             id
             name
             price
@@ -35,6 +33,27 @@ export const PRODUCT_DETAIL = gql`
                 options
             }
             tags
+        }
+    }
+`;
+
+export const FILTER_OPTIONS = gql`
+    query Categories {
+        categories {
+            items {
+                id
+                name
+                alias
+            }
+        }
+        products {
+            items {
+                tags
+                options {
+                    name
+                    options
+                }
+            }
         }
     }
 `;

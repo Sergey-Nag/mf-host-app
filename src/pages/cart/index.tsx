@@ -4,19 +4,8 @@ import { ReactElement } from "react";
 import { useSelector } from "react-redux";
 import Layout from "../layout";
 import { Products } from "./components/Products";
-import { useMutation } from "@apollo/client";
 
-export interface CartPageProps {
-    ip: string;
-}
-
-export async function getServerSideProps({ req }: any) {
-    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-
-    return { props: { ip }};
-}
-
-export default function CartPage({ pageProps }: { pageProps: CartPageProps }) {
+export default function CartPage() {
     const cart = useSelector((state: AppState) => state.session.cart);
     return (
         <Container>
