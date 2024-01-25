@@ -10,7 +10,7 @@ export function ProductCharacteristics({ characteristics: chars }: ProductCharac
             <Typography variant="h6" gutterBottom marginTop={2}>
                 Characteristics
             </Typography>
-            <Typography variant="body1" gutterBottom paddingLeft={3}>
+            <Box paddingLeft={3}>
                 <ul>
                     {chars.map((char) => (
                         <li key={char.name}>
@@ -20,7 +20,7 @@ export function ProductCharacteristics({ characteristics: chars }: ProductCharac
                         </li>
                     ))}
                 </ul>
-            </Typography>
+            </Box>
         </Box>
     )
 }
