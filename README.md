@@ -11,7 +11,7 @@ This repository contains the source code for an E-Shop built using Next.js.
 
    ```bash
    git clone https://github.com/Sergey-Nag/mf-host-app.git
-   cd e-shop-next
+   cd mf-host-app
    ```
 
 2. **Install Dependencies:**
