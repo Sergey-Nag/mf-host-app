@@ -20,34 +20,31 @@ export function ProductOptions({ selected = {}, options, onChange }: ProductOpti
             <Typography variant="h6" gutterBottom marginTop={2}>
                 Options
             </Typography>
-            <Typography variant="body1" gutterBottom paddingLeft={3}>
+            <Box paddingLeft={3}>
                 <ul className={classes.list}>
                     {options.map((option) => (
                         <li key={option.name}>
-                            <Typography variant="body1">
-                                <Grid container alignItems="center">
-                                    <Grid item xs={2}>
-                                        <label htmlFor={option.name}>{option.name}</label>
-                                    </Grid>
-                                    <Grid item xs={9}>
-                                        <Select
-                                            id={option.name}
-                                            value={selected[option.name] ?? ''}
-                                            size="small"
-                                            onChange={(e) => onChange(option.name, e.target.value)}
-                                        >
-                                            {option.options.map((opt) => (
-                                                <MenuItem key={opt} value={opt}>{opt}</MenuItem>
-                                            ))}
-                                        </Select>
-                                    </Grid>
+                            <Grid container alignItems="center">
+                                <Grid item xs={2}>
+                                    <label htmlFor={option.name}>{option.name}</label>
                                 </Grid>
-                            </Typography>
+                                <Grid item xs={9}>
+                                    <Select
+                                        id={option.name}
+                                        value={selected[option.name] ?? ''}
+                                        size="small"
+                                        onChange={(e) => onChange(option.name, e.target.value)}
+                                    >
+                                        {option.options.map((opt) => (
+                                            <MenuItem key={opt} value={opt}>{opt}</MenuItem>
+                                        ))}
+                                    </Select>
+                                </Grid>
+                            </Grid>
                         </li>
                     ))}
                 </ul>
-            </Typography>
+            </Box>
         </Box>
-
     )
 }

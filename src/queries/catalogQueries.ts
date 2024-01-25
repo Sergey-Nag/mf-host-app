@@ -37,6 +37,16 @@ export const PRODUCT_DETAIL = gql`
     }
 `;
 
+export const PRODUCTS_ALIAS = gql`
+    query ProductsAlias {
+        products {
+            items {
+                alias
+            }
+        }
+    }
+`;
+
 export const FILTER_OPTIONS = gql`
     query Categories {
         categories {

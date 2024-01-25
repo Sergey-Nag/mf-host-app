@@ -1,7 +1,7 @@
 # E-Shop (host) Next.js Application
 
 This repository contains the source code for an E-Shop built using Next.js.
-- [Admin panel](https://github.com/Sergey-Nag/mf-host-app) (Microfrontend app)
+- [Admin panel](https://github.com/Sergey-Nag/mf-admin-app) (Microfrontend app)
 - [API Server](https://github.com/Sergey-Nag/cms-data-api) (GraphQL and REST API server)
 
 
@@ -76,7 +76,7 @@ The application is configured to launch with a custom server defined in `server.
 
 ### Microfrontend Admin Panel App
 
-For the admin panel, we utilize the [Admin Microfrontend app](https://github.com/Sergey-Nag/mf-host-app). Ensure it is built and running to access the `/admin` route.
+For the admin panel, we utilize the [Admin Microfrontend app](https://github.com/Sergey-Nag/mf-admin-app). Ensure it is built and running to access the `/admin` route.
 
 ### API Server App
 
