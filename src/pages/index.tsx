@@ -1,16 +1,16 @@
-import Head from 'next/head'
-import Link from 'next/link';
-import { Container, Typography } from '@mui/material';
-import { ReactElement } from 'react';
-import Layout from './layout';
-import SliderSection from './sections/SliderSection/SliderSection';
-import CatalogSection from './sections/CatalogSection/CatalogSection';
-import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
-import { appoloClient } from './_app';
-import { gql } from '@apollo/client';
-import { Category, PaginatedCategories, ProductOption } from '@/gql/graphql';
-import { AppProps } from 'next/app';
+import { PaginatedCategories, ProductOption } from '@/gql/graphql';
 import { ProductFilterOptions, ProductOptionsMap } from '@/shared/components/Catalog/components/FilterControls/FilterControls';
+import { gql } from '@apollo/client';
+import { loadDevMessages, loadErrorMessages } from "@apollo/client/dev";
+import { Container, Typography } from '@mui/material';
+import { AppProps } from 'next/app';
+import Head from 'next/head';
+import Link from 'next/link';
+import { ReactElement } from 'react';
+import { appoloClient } from './_app';
+import Layout from './layout';
+import CatalogSection from './sections/CatalogSection/CatalogSection';
+import SliderSection from './sections/SliderSection/SliderSection';
 
 loadDevMessages();
 loadErrorMessages();

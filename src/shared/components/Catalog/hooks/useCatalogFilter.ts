@@ -7,7 +7,7 @@ import {
     PRICE_DECIMALS,
 } from "../constants";
 
-export function useCatalogFilter() {
+export function useCatalogFilter(externalFilter?: ProductFilter) {
     const [available, setAvailable] = useState<Partial<ProductFilter>>();
     const [restFilter, setRestFilter] = useState<ProductFilterFormValues>();
 
@@ -45,9 +45,10 @@ export function useCatalogFilter() {
                         ? `>= ${restFilter.price.min} && <= ${restFilter.price.max}`
                         : undefined,
                 options,
+                ...externalFilter,
             }
         },
-        [available, restFilter]
+        [available, restFilter, externalFilter]
     );
 
     return {

@@ -1,15 +1,14 @@
-// components/ProductDetail.js
-import React, { useState } from 'react';
-import { Container, Grid, Typography, Button, TextField, Divider, Chip } from '@mui/material';
-import { tss } from 'tss-react/mui';
-import Image from 'next/image';
 import { QuantityCounter } from '@/shared/components/QuantityCounter';
-import { ProductOptions } from './ProductOptions';
-import { ProductCharacteristics } from './ProductCharacteristics';
-import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, removeProduct } from '@/state/session/sesionSlice';
 import { AppState } from '@/state/session/store';
+import { Button, Chip, Divider, Grid, Typography } from '@mui/material';
 import Head from 'next/head';
+import Image from 'next/image';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { tss } from 'tss-react/mui';
+import { ProductCharacteristics } from './ProductCharacteristics';
+import { ProductOptions } from './ProductOptions';
 
 const useStyles = tss.create(({ theme }) => ({
     coverPhoto: {
@@ -129,7 +128,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                         Price: <strong>${product.price}</strong>
                     </Typography>
                     <Grid container>
-                        <Grid item xs={5} sm={4} md={3}>
+                        <Grid item xs={5} sm={4} md={3} textAlign="center">
                             <QuantityCounter
                                 value={quantity}
                                 max={maxItems}

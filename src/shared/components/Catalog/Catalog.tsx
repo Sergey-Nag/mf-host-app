@@ -9,9 +9,11 @@ import SortControls from "./components/SortControls";
 import { useCatalogFilter } from "./hooks/useCatalogFilter";
 import { useCatalogPagination } from "./hooks/useCatalogPagination";
 import { useCatalogSorting } from "./hooks/useCatalogSorting";
+import { ProductFilter } from "@/gql/graphql";
 
 export interface CatalogProps {
-    filter?: ProductFilterOptions;
+    filterOptions?: ProductFilterOptions;
+    externalFilter?: ProductFilter;
     sorting?: boolean;
     pagination?: boolean;
     productsPerPage?: number;
@@ -19,13 +21,13 @@ export interface CatalogProps {
     removeFromCart?: (id: string) => void;
 }
 
-function Catalog({ sorting, filter, pagination: isPagination, productsPerPage, onAddToCart, removeFromCart }: CatalogProps) {
+function Catalog({ sorting, filterOptions, pagination: isPagination, externalFilter, productsPerPage, onAddToCart, removeFromCart }: CatalogProps) {
     const { sortValue, setSortValue, sort } = useCatalogSorting();
     const { page, setPage, pages, setPaginationData, pagination } = useCatalogPagination(productsPerPage);
-    const { productFilter, setRestFilter, onAvailableChange } = useCatalogFilter();
+    const { productFilter, setRestFilter, onAvailableChange } = useCatalogFilter(externalFilter);
 
     return (
-        <CatalogWithFilter filter={filter} onFilterSubmit={setRestFilter}>
+        <CatalogWithFilter filter={filterOptions} onFilterSubmit={setRestFilter}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     {sorting && (
