@@ -19,9 +19,9 @@ export default function Navbar() {
                 </Grid>
                 <Grid item xs={6}>
                     <nav className={classes.navigation}>
-                        <NavButton href="/">Catalog</NavButton>
+                        <NavButton href="/">Home</NavButton>
                         <Divider orientation='vertical' flexItem />
-                        <NavButton href="/">Categories</NavButton>
+                        <NavButton href="/catalog">Catalog</NavButton>
                         <Divider orientation='vertical' flexItem />
                         <Badge className={classes.cartBadge} badgeContent={cartLength} color="primary">
                             <NavButton href="/cart" startIcon={<ShoppingCartIcon />}>
