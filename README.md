@@ -5,6 +5,10 @@ This repository contains the source code for an E-Shop built using Next.js.
 - [API Server](https://github.com/Sergey-Nag/cms-data-api) (GraphQL and REST API server)
 
 
+### Prerequisites
+
+Make sure you have Node.js (v20)
+
 ## Getting Started
 
 1. **Clone the Repository:**
