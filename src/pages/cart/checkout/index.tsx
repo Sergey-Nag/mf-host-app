@@ -8,15 +8,13 @@ import { ReactElement, useEffect, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { tss } from 'tss-react/mui';
 import * as Yup from 'yup';
-import { CHECKOUT, GET_CART_PRODUCTS, GET_CUSTOMER_BY_IP } from '../../../queries/cartQueries';
+import { CHECKOUT, GET_CART_PRODUCTS } from '../../../queries/cartQueries';
 import { PHONE_NUMBER_REGEXP } from '@/constants/regexp';
-import { appoloClient } from '@/pages/_app';
 import { clearCart } from '@/state/session/sesionSlice';
 
 export interface CheckoutProps {
     pageProps: {
         ip: string;
-        customer: any;
     }
 }
 
@@ -67,21 +65,19 @@ export default function CheckoutPage({ pageProps }: CheckoutProps) {
                 amount: cart[id],
             }));
 
-            const { id, ...existedCustomer } = pageProps.customer ?? {};
-            const customer = existedCustomer ? undefined : {
+            const customer = {
                 email: values.email,
                 firstname: values.firstname,
                 lastname: values.lastname,
                 phone: values.phone,
-                ip: pageProps.ip,
+                ip: pageProps.ip ?? undefined,
             };
-
+            
             checkut({
                 variables: {
                     input: {
                         customer,
                         orderProducts,
-                        customerId: id ?? undefined,
                         description: values.description,
                         shippingAddress: values.shippingAddress,
                         billingAddress: values.billingAddress,
@@ -303,18 +299,10 @@ const useStyles = tss.create(() => ({
 
 export async function getServerSideProps({ req }: any) {
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-    
-    const { data } = await appoloClient.query<any>({
-        query: GET_CUSTOMER_BY_IP,
-        variables: {
-            ip,
-        },
-    });
 
     return {
         props: {
             ip,
-            customer: data?.customer,
         }
     }
 }

@@ -26,21 +26,6 @@ export const GET_CART_PRODUCTS = gql(`
     }
 `);
 
-export const GET_CUSTOMER_BY_IP = gql(`
-    query Customer($ip: String!) {
-        customer(find: {
-            ip: $ip
-        }) {
-            id
-            ip
-            firstname
-            lastname
-            email
-            phone
-        }
-    }
-`);
-
 export const CHECKOUT = gql(`
     mutation Checkout($input: NewOrderInput!) {
         addOrder(input: $input) {
